@@ -171,6 +171,9 @@ lingua-chat/
 ├── .env.example           # Environment variable template
 ├── .gitignore
 ├── screenshots/           # App previews
+├── widget/                # Embeddable popup chat widget
+│   ├── server.py          # FastAPI backend
+│   └── embed.html         # Popup chat HTML+CSS+JS
 └── README.md              # This file
 ```
 
@@ -374,7 +377,83 @@ LANGUAGES = ["English", "Japanese", "Korean", "Mandarin", "French", "Spanish", "
 
 ---
 
-## License
+---
+## Embeddable Widget
+
+LinguaChat can be embedded on any website as a floating popup chat widget — like Intercom or Crisp.
+
+### Architecture
+
+```
+┌──────────────┐     POST /api/chat     ┌──────────────────────┐
+│  Your Site   │ ─────────────────────── │  FastAPI Widget       │
+│  (embed.html) │ ─────────────────────── │  (widget/server.py)   │
+└──────────────┘     JSON response       └──────────┬───────────┘
+                                                    │
+                                          chat_engine.py
+                                                    │
+                                          Gemini API
+```
+
+### Quick Start
+
+```bash
+# 1. Install dependencies
+pip install -r requirements.txt
+
+# 2. Set your API key
+cp .env.example .env
+# Edit .env → GEMINI_API_KEY=your-key
+
+# 3. Start the widget server
+python widget/server.py
+# → http://localhost:8000
+```
+
+### Embed on Your Site
+
+Add this snippet before `</body>`:
+
+```html
+<script>
+  window.LC_API_URL = 'https://your-server.com/api/chat';
+</script>
+<script src="https://your-server.com/widget.js" defer></script>
+```
+
+Or use an iframe:
+
+```html
+<iframe src="https://your-server.com/"
+  style="position:fixed;bottom:20px;right:20px;width:380px;height:600px;border:none;border-radius:12px;z-index:9999;">
+</iframe>
+```
+
+### API
+
+| Endpoint | Method | Description |
+|---|---|---|
+| `GET /api/health` | GET | Health check |
+| `POST /api/chat` | POST | Send message, get AI reply |
+
+**POST `/api/chat`**
+
+```json
+{
+  "config": { "focus_mode": "helpbox" },
+  "messages": [{"role": "user", "content": "..."}],
+  "user_input": "Hello!"
+}
+```
+
+Returns:
+
+```json
+{ "response": "Hi there! How can I help you today?" }
+```
+
+---
+
 
 MIT © 2026 Subchan Yayan Bachtiar
 

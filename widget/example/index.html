@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Website — with LinguaChat</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; background: #f8f9fb; color: #1a1a2e; }
+    .container { max-width: 800px; margin: 0 auto; padding: 60px 24px; }
+    h1 { font-size: 36px; margin-bottom: 16px; }
+    p { font-size: 16px; line-height: 1.7; color: #4b5563; margin-bottom: 12px; }
+    .card { background: #fff; padding: 24px; border-radius: 12px; box-shadow: 0 1px 4px rgba(0,0,0,0.08); margin-top: 32px; }
+    code { background: #eef2f6; padding: 2px 6px; border-radius: 4px; font-size: 14px; }
+    pre { background: #1a1a2e; color: #e5e7eb; padding: 16px; border-radius: 8px; overflow-x: auto; font-size: 14px; margin-top: 12px; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>🏡 My Website</h1>
+    <p>Welcome to my website! This is a demo page showing how LinguaChat can be embedded as a floating chat widget — just like Intercom or Crisp.</p>
+    <p>The chat bubble in the bottom-right corner was added with just <strong>one line of code</strong>.</p>
+
+    <div class="card">
+      <h2>⚡ How to embed</h2>
+      <p>Add this before <code>&lt;/body&gt;</code> on your page:</p>
+      <pre>&lt;iframe src="http://localhost:8001"
+  style="position:fixed;bottom:20px;right:20px;
+         width:380px;height:600px;border:none;
+         border-radius:12px;z-index:9999;"&gt;
+&lt;/iframe&gt;</pre>
+    </div>
+  </div>
+
+  <!-- ⚡ Embed LinguaChat Widget — just 1 iframe line -->
+  <iframe src="http://localhost:8001"
+    style="position:fixed;bottom:20px;right:20px;width:380px;height:600px;border:none;border-radius:12px;z-index:9999;box-shadow:0 8px 32px rgba(0,0,0,0.12);">
+  </iframe>
+</body>
+</html>

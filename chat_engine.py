@@ -58,6 +58,12 @@ def build_system_prompt(config: dict) -> str:
             "After the user answers, tell them if they're correct and explain why.\n"
             "Then generate a new question."
         ),
+        "helpbox": (
+            f"You are a helpful assistant embedded on a website as a live chat widget.\n"
+            "Respond conversationally and concisely (1-2 paragraphs max).\n"
+            "Help users with their questions in a friendly, professional tone.\n"
+            f"Primary language: {target}."
+        ),
     }
 
     instruction = mode_instructions.get(mode, mode_instructions["conversation"])
@@ -99,8 +105,8 @@ def get_ai_response(config: dict, messages: list, user_input: str) -> str:
         config=types.GenerateContentConfig(
             system_instruction=system_prompt,
             temperature=0.7,
-            max_output_tokens=500,
+            max_output_tokens=1024,
         ),
     )
 
-    return response.text
+    return response.text or "I'm sorry, I couldn't generate a response. Please try again."

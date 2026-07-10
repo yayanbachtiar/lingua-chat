@@ -11,13 +11,14 @@ DEFAULT_CONFIG = {
 LANGUAGES = ["English", "Japanese", "Korean", "Mandarin", "French", "Spanish"]
 TONES = ["formal", "casual", "friendly"]
 DIFFICULTIES = ["beginner", "intermediate", "advanced"]
-MODES = ["conversation", "grammar", "vocab", "quiz"]
+MODES = ["conversation", "grammar", "vocab", "quiz", "helpbox"]
 
 MODE_LABELS = {
     "conversation": "💬 Conversation",
     "grammar": "📝 Grammar Check",
     "vocab": "📚 Vocabulary",
     "quiz": "🎯 Quiz",
+    "helpbox": "💬 HelpBox",
 }
 
 MODE_DESCRIPTIONS = {
@@ -25,4 +26,5 @@ MODE_DESCRIPTIONS = {
     "grammar": "Write a sentence and get grammar corrections with explanations.",
     "vocab": "Ask about any word — get definition, examples, synonyms.",
     "quiz": "Test your knowledge with AI-generated quiz questions.",
+    "helpbox": "Embeddable popup chat widget — assist users on any platform.",
 }
