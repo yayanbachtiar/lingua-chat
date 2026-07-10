@@ -366,6 +366,44 @@ LANGUAGES = ["English", "Japanese", "Korean", "Mandarin", "French", "Spanish", "
 
 ---
 
+## Testing
+
+LinguaChat includes **29 automated tests** — unit tests for the engine + E2E browser smoke tests.
+
+### Unit Tests
+
+Tests for config constants and the chat engine prompt builder with mocked API — **no API key required**.
+
+```bash
+pytest tests/ --ignore=tests/e2e -v
+```
+
+Expected: **20 passed**
+
+### E2E Tests
+
+Browser-based smoke tests using **Playwright**. Requires the app to be running.
+
+```bash
+# Terminal 1 — start the app
+streamlit run app.py
+
+# Terminal 2 — run tests
+pytest tests/e2e/ -v --base-url http://localhost:8501
+```
+
+Expected: **9 passed**
+
+### Test Coverage
+
+| Scope | File | Tests | What it covers |
+|---|---|---|---|
+| Configuration | `tests/test_config.py` | 10 | Defaults, supported languages/tones/difficulties, all 5 modes + labels + descriptions |
+| Chat Engine | `tests/test_chat_engine.py` | 10 | System prompts for all modes (conversation, grammar, vocab, quiz, helpbox), tone/difficulty variation, mocked API flow, None fallback, missing API key error |
+| E2E Smoke | `tests/e2e/test_app_smoke.py` | 9 | App loads, sidebar settings visible, all 4 mode radio buttons, chat input, language combobox, clear button, widget health endpoint, widget page loads, example embed with iframe |
+
+---
+
 ## Tech Stack
 
 | Component | Technology | Cost |
